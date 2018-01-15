@@ -33,21 +33,16 @@ namespace WebFileUpload.Controllers
         }
 
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase uploadFile)
+        public ActionResult Upload(HttpPostedFileBase[] uploadFile)
         {
             var dataFolder = Server.MapPath("~/Data");
 
-            if (uploadFile?.ContentLength > 0)
+            uploadFile.ToList().ForEach(f =>
             {
-                var fileName = Path.GetFileName(uploadFile.FileName);
+                var fileName = Path.GetFileName(f.FileName);
                 var path = Path.Combine(dataFolder, fileName);
-
-                uploadFile.SaveAs(path);
-            }
-            else
-            {
-                return Json(new { statusCode = 200, status = "failed" }, JsonRequestBehavior.AllowGet);
-            }
+                f.SaveAs(path);
+            });
 
             return Json(new { statusCode = 200, status = "success"}, JsonRequestBehavior.AllowGet);
         }
