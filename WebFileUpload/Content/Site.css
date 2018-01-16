@@ -44,3 +44,43 @@ textarea {
 .thumb {
     max-width: 100%;
 }
+
+.file-content {
+    padding: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #6091d3;
+    background: #FFF;
+    border: solid 3px #6091d3;
+    border-radius: 10px;
+}
+
+.filedrop-area {
+    border: 2px dashed #bbb;
+    border-radius: 5px;
+    color: #bbb;
+    padding: 25px;
+    text-align: center;
+    margin-top: 10px;
+    width: 95%;
+}
+
+.filedrop-area {
+    border: 2px dashed #bbb;
+    border-radius: 5px;
+    color: #bbb;
+    padding: 25px;
+    text-align: center;
+    margin-top: 10px;
+    width: 95%;
+}
+
+.filedrop-area-hover {
+    border: 2px solid #000;
+    border-radius: 5px;
+    color: #bbb;
+    padding: 25px;
+    text-align: center;
+    margin-top: 10px;
+    width: 95%;
+}

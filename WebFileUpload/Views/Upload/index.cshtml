@@ -8,6 +8,7 @@
 <h2>file upload test</h2>
 
 <div class="container">
+    <!-- server file list -->
     <div class="row">
         <table class="table">
             <thead>
@@ -19,32 +20,52 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <th>@Html.DisplayFor(modelItem => item.FileName)</th>
-                        <td>@Html.DisplayFor(modelItem => item.LastWriteTime)</td>
-                    </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastWriteTime)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Download", "Upload", new { fileName = @item.FileName })" class="btn btn-success">
+                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger delete-button" type="button" value="@item.FileName">
+                            <i class="glyphicon glyphicon-remove-sign"></i>
+                            <span>Delete</span>
+                        </button>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
     </div>
-
+    <!-- upload form -->
     <div class="row">
         <div>
             <form id="upload-form" enctype="multipart/form-data" method="post">
+                <!-- add file button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
                     <span>Add files...</span>
                     <input type="file" multiple name="uploadFile" id="uploadFile" />
                 </span>
+                <!-- upload button -->
                 <button class="btn btn-primary start" type="button" id="submit">
                     <i class="glyphicon glyphicon-upload"></i>
                     <span>Start upload</span>
                 </button>
             </form>
         </div>
+        <!-- drag and drop area -->
+        <div id="filedrop-area" class="filedrop-area">Drag and drop files here</div>
     </div>
 </div>
 
-<div class="container file-content">
+<!-- add file list -->
+<div class="container">
     <div id="files" class="row"></div>
 </div>

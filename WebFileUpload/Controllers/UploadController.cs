@@ -10,14 +10,10 @@ namespace WebFileUpload.Controllers
 {
     public class UploadController : Controller
     {
-        // GET: Upload
         public ActionResult Index()
         {
             var dataFolder = Server.MapPath("~/Data");
-            if (!Directory.Exists(dataFolder))
-            {
-                Directory.CreateDirectory(dataFolder);
-            }
+            if (!Directory.Exists(dataFolder)) Directory.CreateDirectory(dataFolder);
 
             var dir = new DirectoryInfo(dataFolder);
             var uploads = new List<Upload>();
@@ -46,5 +42,22 @@ namespace WebFileUpload.Controllers
 
             return Json(new { statusCode = 200, status = "success"}, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Delete(string fileName)
+        {
+            var dataFolder = Server.MapPath("~/Data");
+            var path = Path.Combine(dataFolder, fileName);
+            System.IO.File.Delete(path);
+            return Json(new { statusCode = 200, status = "success" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public FileResult Download(string fileName)
+        {
+            var dataFolder = Server.MapPath("~/Data");
+            var path = Path.Combine(dataFolder, fileName);
+            return File(path, MimeMapping.GetMimeMapping(fileName), fileName);
+        }
+
     }
 }
