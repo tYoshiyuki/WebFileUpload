@@ -33,7 +33,7 @@
             type: 'POST',
             success: data => {
                 alert(data.status);
-                if (data.statusCode == 200) location.reload();
+                if (data.statusCode === 200) location.reload();
             },
             error: (xhr, ajaxOptions, thrownError) => alert("There was an error attempting to delete the file. (" + thrownError + ")"),
             data: JSON.stringify(data),
@@ -77,7 +77,7 @@ async function selectFile(evt) {
                 row += '<div name="fileType" class="info">' + "type : " + selectedFile.type + '</div>';
                 row += '<div name="fileSize" class="info">' + "Size : " + fileSize + '</div>';
                 row += '</div>';
-                $('#files').append(row)
+                $('#files').append(row);
             }
         }
     }
@@ -89,11 +89,11 @@ function readImage(file) {
         var reader = new FileReader();
         reader.onload = e => {
             var dataURL = reader.result;
-            var img = new Image()
+            var img = new Image();
             img.src = dataURL;
             img.className = "thumb";
             resolve(img);
-        }
+        };
         reader.readAsDataURL(file);
     });
 }
@@ -109,7 +109,7 @@ function uploadFile() {
         type: 'POST',
         success: data => {
             alert(data.status);
-            if (data.statusCode == 200) location.reload();
+            if (data.statusCode === 200) location.reload();
         },
         error: (xhr, ajaxOptions, thrownError) => alert("There was an error attempting to upload the file. (" + thrownError + ")"),
         data: dataString,
